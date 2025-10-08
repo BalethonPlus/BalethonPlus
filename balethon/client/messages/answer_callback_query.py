@@ -6,7 +6,7 @@ class AnswerCallbackQuery:
     async def answer_callback_query(
             self: "balethon.Client",
             callback_query_id: str,
-            text: str,
+            text: str = None,
             show_alert: bool = False
     ) -> bool:
         return await self.auto_execute("post", "answerCallbackQuery", locals())
