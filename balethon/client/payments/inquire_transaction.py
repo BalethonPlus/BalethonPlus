@@ -4,7 +4,7 @@ from ...objects import Transaction
 
 class InquireTransaction:
 
-    async def inquire_tarnsaction(
+    async def inquire_transaction(
             self: "balethon.Client",
             transaction_id: str
     ) -> Transaction:
