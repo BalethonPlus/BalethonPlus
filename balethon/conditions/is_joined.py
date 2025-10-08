@@ -7,7 +7,7 @@ from ..errors import RPCError, ForbiddenError
 
 
 class IsJoined(Condition):
-    ACCEPTED_STATUSES = ChatMemberStatus.MEMBER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.CREATOR
+    ACCEPTED_STATUSES = ChatMemberStatus.MEMBER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.CREATOR, ChatMemberStatus.RESTRICTED
 
     def __init__(self, *chat_ids: Union[int, str], accepted_statuses: Tuple[str, ...] = None):
         super().__init__(can_process=(Message, CallbackQuery))
