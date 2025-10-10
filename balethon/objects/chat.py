@@ -1,8 +1,7 @@
-from typing import Union, BinaryIO
+from typing import BinaryIO, Union
 
 from . import Object
-from balethon import objects
-from balethon import enums
+from balethon import enums, objects
 from ..sync_support import add_sync_support_to_object
 
 
@@ -12,7 +11,7 @@ class Chat(Object):
     def __init__(
             self,
             id: int = None,
-            type: "enums.ChatType" = None,
+            type: str = None,
             title: str = None,
             username: str = None,
             first_name: str = None,
