@@ -205,7 +205,7 @@ class Message(Object):
             caption: str = None,
             reply_markup: "objects.ReplyMarkup" = None
     ):
-        return await self.client.send_video(self.chat.id, video, duration, width, height, caption, reply_markup)
+        return await self.client.send_video(self.chat.id, video, duration, width, height, caption, reply_markup, self.id)
 
     async def reply_voice(
             self,
