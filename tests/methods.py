@@ -160,7 +160,7 @@ async def test_payment_methods(client):
         description="Test",
         payload="Test",
         provider_token="Test",
-        prices="0"
+        prices=[LabeledPrice(label="Test", amount=0)]
     )
     print(f"send_invoice: {response}")
 
