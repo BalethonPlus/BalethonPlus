@@ -1,7 +1,7 @@
 from asyncio import run, sleep
 
 from balethon import Client
-from balethon.objects import InputMediaPhoto, InputMediaVideo
+from balethon.objects import InputMediaPhoto, InputMediaVideo, LabeledPrice
 
 from config import TOKEN, CHAT_ID, USER_ID
 
@@ -163,6 +163,18 @@ async def test_payment_methods(client):
         prices="0"
     )
     print(f"send_invoice: {response}")
+
+    response = await client.create_invoice_link(
+        title="Test",
+        description="Test",
+        payload="Test",
+        provider_token="Test",
+        prices=[LabeledPrice(label="Test", amount=0)]
+    )
+    print(f"create_invoice_link: {response}")
+
+    response = await client.inquire_transaction(transaction_id="Test")
+    print(f"inquire_transaction: {response}")
 
 
 async def test_invite_link_methods(client):
