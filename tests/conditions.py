@@ -156,5 +156,10 @@ async def test_is_joined(_, __):
     print("This message falls under the condition of IS JOINED")
 
 
+@bot.on_message(conditions.restriction(0.5))
+async def test_restriction(_, __):
+    print("This message falls under the condition of RESTRICTION")
+
+
 if __name__ == "__main__":
     bot.run()
