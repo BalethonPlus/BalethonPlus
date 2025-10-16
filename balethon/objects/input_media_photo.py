@@ -11,4 +11,9 @@ class InputMediaPhoto(InputMedia):
             caption: str = None,
             **kwargs
     ):
-        super().__init__("photo", media, caption, **kwargs)
+        super().__init__(
+            type="photo",
+            media=media,
+            caption=caption,
+            **kwargs
+        )

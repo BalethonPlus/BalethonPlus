@@ -1,3 +1,5 @@
+from typing import Union, BinaryIO
+
 from .input_media import InputMedia
 
 
@@ -5,7 +7,7 @@ class InputMediaDocument(InputMedia):
 
     def __init__(
             self,
-            media: str = None,
+            media: Union[str, bytes, BinaryIO] = None,
             thumbnail: str = None,
             caption: str = None,
             **kwargs
