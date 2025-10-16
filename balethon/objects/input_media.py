@@ -10,7 +10,7 @@ class InputMedia(Object):
             self,
             type: str = None,
             media: Union[str, bytes, BinaryIO] = None,
-            thumbnail: str = None,
+            thumbnail: Union[str, bytes, BinaryIO] = None,
             caption: str = None,
             width: int = None,
             height: int = None,
@@ -21,7 +21,7 @@ class InputMedia(Object):
         super().__init__(**kwargs)
         self.type: str = type
         self.media: Union[str, bytes, BinaryIO] = resolve_media(media)
-        self.thumbnail: str = thumbnail
+        self.thumbnail: Union[str, bytes, BinaryIO] = resolve_media(thumbnail)
         self.caption: str = caption
         self.width: int = width
         self.height: int = height

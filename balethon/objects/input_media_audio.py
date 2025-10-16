@@ -8,7 +8,7 @@ class InputMediaAudio(InputMedia):
     def __init__(
             self,
             media: Union[str, bytes, BinaryIO] = None,
-            thumbnail: str = None,
+            thumbnail: Union[str, bytes, BinaryIO] = None,
             caption: str = None,
             duration: int = None,
             title: str = None,

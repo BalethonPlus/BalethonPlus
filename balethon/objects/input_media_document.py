@@ -8,7 +8,7 @@ class InputMediaDocument(InputMedia):
     def __init__(
             self,
             media: Union[str, bytes, BinaryIO] = None,
-            thumbnail: str = None,
+            thumbnail: Union[str, bytes, BinaryIO] = None,
             caption: str = None,
             **kwargs
     ):
