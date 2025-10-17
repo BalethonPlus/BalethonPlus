@@ -1,4 +1,6 @@
+from json import loads
 from logging import getLogger
+from re import search
 
 from httpx import AsyncClient
 from httpx._types import ProxyTypes
@@ -47,6 +49,12 @@ class Connection:
 
     def file_url(self, file_id: str) -> str:
         return f"{self.base_url}/file/bot{self.token}/{file_id}"
+
+    async def get_peer_info(self, query: str):
+        response = await self.client.get(f"{self.short_url}/{query}")
+        json_info = search(r'(<script id="__NEXT_DATA__" type="application/json">.*</script>)', response.text)[0]
+        json_info = search(r"({.*})", json_info)[0]
+        return loads(json_info)
 
     async def request(self, method: str, service: str, data: dict = None, json: dict = None, files: dict = None):
         if json:
