@@ -1,3 +1,4 @@
+from time import time
 from random import randint
 
 from httpx import AsyncClient
@@ -24,6 +25,9 @@ class Client:
         self.time_out = time_out
         self.proxy = proxy
         self.client = AsyncClient(proxy=self.proxy, timeout=self.time_out)
+        self.__last_access_token = None
+        self.__last_access_token_type = None
+        self.__last_access_token_expire_time = None
 
     def __repr__(self):
         return f"{type(self).__name__}({self.id})"
@@ -48,7 +52,16 @@ class Client:
     def __exit__(self, *args):
         self.disconnect()
 
-    async def get_auth_token(self) -> str:
+    async def get_access_token(self) -> tuple[str, str]:
+        current_time = int(time())
+
+        if (
+            self.__last_access_token is not None
+            and self.__last_access_token_type is not None
+            and self.__last_access_token_expire_time - current_time > 60
+        ):
+            return self.__last_access_token, self.__last_access_token_type
+
         response = await self.client.post(
             f"{self.BASE_URL}/api/v2/auth/token",
             headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -65,10 +78,14 @@ class Client:
         if response.status_code != 200:
             raise RPCError.create(response.status_code, response_json)
 
-        return response_json["access_token"]
+        self.__last_access_token = response_json["access_token"]
+        self.__last_access_token_type = response_json["token_type"]
+        self.__last_access_token_expire_time = current_time + response_json.get("expires_in", 43200)
+
+        return self.__last_access_token, self.__last_access_token_type
 
     async def send_otp(self, phone: str, otp: int):
-        token = await self.get_auth_token()
+        token, token_type = await self.get_access_token()
 
         json = locals()
         del json["self"]
@@ -76,8 +93,8 @@ class Client:
         response = await self.client.post(
             f"{self.BASE_URL}/api/v2/send_otp",
             headers={
-                "Authorization": f"Bearer {token}",
-                "Content-Type": "application/json",
+                "Authorization": f"{token_type} {token}",
+                "Content-Type": "application/json"
             },
             json=json
         )
