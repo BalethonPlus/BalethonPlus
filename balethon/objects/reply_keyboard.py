@@ -17,6 +17,7 @@ class ReplyKeyboard(ReplyMarkup):
             resize: bool = None,
             one_time: bool = None,
             selective: bool = None,
+            remove_keyboard: bool = None,
             **kwargs
     ):
         super().__init__(**kwargs)
@@ -26,6 +27,7 @@ class ReplyKeyboard(ReplyMarkup):
         self.resize: bool = resize
         self.one_time: bool = one_time
         self.selective: bool = selective
+        self.remove_keyboard: bool = remove_keyboard
 
     def add_button(
             self,
