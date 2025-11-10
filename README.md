@@ -45,7 +45,7 @@ pip install BalethonPlus
 ## Links
 
 - [Documentation](https://balethon.ir)
-- [GitHub page](https://github.com/Balethon/Balethon)
-- [Pypi page](https://pypi.org/project/Balethon)
+- [GitHub page](https://github.com/BalethonPlus/BalethonPlus)
+- [Pypi page](https://pypi.org/project/BalethonPlus)
 - [Bale news channel](https://ble.ir/balethon)
 - [Bale community chat group](https://ble.ir/join/MTlhN2Q2Mz)
