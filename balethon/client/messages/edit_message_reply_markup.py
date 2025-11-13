@@ -11,7 +11,7 @@ class EditMessageReplyMarkup:
             self: "balethon.Client",
             chat_id: Union[int, str],
             message_id: int,
-            reply_markup: "objects.InlineKeyboard"
+            reply_markup: "objects.ReplyMarkup"
     ) -> Message:
         chat_id = await self.resolve_peer_id(chat_id)
         return await self.auto_execute("post", "editMessageReplyMarkup", locals())
